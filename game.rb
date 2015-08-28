@@ -44,6 +44,13 @@ class Game
     board.render
     puts current_player.name
     puts "Piece selected: #{board.selected_piece}#{board.selected_piece.class}" unless board.selected_piece.nil?
+    puts "" if board.selected_piece.nil?
+    puts ""
+    puts "Controls:"
+    puts "   WASD keys to move the cursor"
+    puts "   Enter to select and deselect a piece"
+    puts "   V to save your game"
+    puts "   Q to quit"
   end
 
   def change_current_player
