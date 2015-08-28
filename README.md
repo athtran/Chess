@@ -2,7 +2,7 @@
 
 Console game built in pure Ruby.
 
-![wow these guys are bad players](/chess/demo.gif)
+![wow these guys are bad players](/demo.gif)
 
 Built in:
 
@@ -12,9 +12,9 @@ Built in:
 
 Clone the repo or download the zip. Open your console or terminal, and navigate to the newly created folder called Chess. Execute the file by running the following command in the terminal.
 
-'''
+```ruby
 ruby game.rb
-'''
+```
 
 ## Key Features
 
