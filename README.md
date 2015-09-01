@@ -1,6 +1,6 @@
 # Chess
 
-Console game built in pure Ruby.
+Classic two player turned based board game, readapted as a console game built in pure Ruby.
 
 ![wow these guys are bad players](/demo.gif)
 
