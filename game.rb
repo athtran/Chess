@@ -14,7 +14,7 @@ require_relative 'board'
 
 class Game
   attr_reader :board, :player1
-  attr_accessor :quit_var, :moved, :current_player
+  attr_accessor :force_quit, :moved, :current_player
 
   def initialize
     @board = Board.new
@@ -25,8 +25,8 @@ class Game
 
   def play
     piece = nil
-    until over? || force_quit?
-      until moved? || force_quit?
+    until over? || force_quit
+      until moved? || force_quit
         render_board
         char = current_player.get_move
         handle_char(char)
@@ -35,7 +35,7 @@ class Game
       check_if_check(current_player)
     end
 
-    win_message unless force_quit?
+    win_message unless force_quit
   end
 
   private
@@ -58,10 +58,6 @@ class Game
   def change_current_player
     current_player == @player1 ? self.current_player = @player2 : self.current_player = @player1
     @move_completed = false
-  end
-
-  def force_quit?
-    quit_var
   end
 
   def check_if_check(current_player)
@@ -98,7 +94,7 @@ class Game
   def handle_char(char)
     case char
     when "q"
-      self.quit_var = true
+      self.force_quit = true
     when "a"
       board.move_cursor(:left)
     when "s"
