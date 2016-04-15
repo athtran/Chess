@@ -3,7 +3,7 @@ require 'byebug'
 require 'io/console'
 
 class Board
-  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece
+  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece, :kings
 
   CURSOR_MOVES = {
       :left => [0, -1],
@@ -17,6 +17,7 @@ class Board
     @cursor_pos = 0, 0
     @helper = false
     @selected_piece = nil
+    @kings = []
     populate_board
   end
 
@@ -32,12 +33,11 @@ class Board
     self[0,5] = Bishop.new([0,5], :black, self)
     self[0,6] = Knight.new([0,6], :black, self)
     self[0,7] = Rook.new([0,7], :black, self)
-
+    @kings << self[0,4]
 
     (0..7).each do |col|
       self[6,col] = Pawn.new([6,col], :white, self)
     end
-
     self[7,0] = Rook.new([7,0], :white, self)
     self[7,1] = Knight.new([7,1], :white, self)
     self[7,2] = Bishop.new([7,2], :white, self)
@@ -46,7 +46,7 @@ class Board
     self[7,5] = Bishop.new([7,5], :white, self)
     self[7,6] = Knight.new([7,6], :white, self)
     self[7,7] = Rook.new([7,7], :white, self)
-
+    @kings << self[7,3]
   end
 
   def select_piece(colour)

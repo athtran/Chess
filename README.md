@@ -14,7 +14,7 @@ ruby game.rb
 
 ## Key Features
 
-**Cusor Controls** Ease of access due to cursor controls instead of coordinate input.
+**Cursor Controls** Ease of access due to cursor controls instead of coordinate input.
 
 **Move Highlighting** Highlights every single possible move per piece. King turns red in the event of a check. Pieces are unable to move into spaces that result in the player losing the game.
 

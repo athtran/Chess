@@ -6,6 +6,7 @@ require_relative 'bishop'
 require_relative 'queen'
 require_relative 'king'
 require_relative 'pawn'
+require_relative 'player'
 require 'yaml'
 
 
@@ -20,8 +21,6 @@ class Game
     @player1 = Player.new("Player 1 - White", :white)
     @player2 = Player.new("Player 2 - Black", :black)
     @current_player = @player1
-    @quit_var = false
-    @move_completed = false
   end
 
   def play
@@ -39,6 +38,8 @@ class Game
     win_message unless force_quit?
   end
 
+  private
+
   def render_board
     system("clear")
     board.render
@@ -51,6 +52,7 @@ class Game
     puts "   Enter to select and deselect a piece"
     puts "   V to save your game"
     puts "   Q to quit"
+    board.kings.each { |king| p king.pos}
   end
 
   def change_current_player
@@ -72,13 +74,8 @@ class Game
   end
 
   def find_king(current_player)
-    (0..7).each do |row|
-      (0..7).each do |col|
-        pos = row, col
-        if board[*pos].class == King && board[*pos].colour == current_player.colour
-          return board[*pos]
-        end
-      end
+    board.kings.each do |king|
+      return king if king.colour == current_player.colour
     end
   end
 
@@ -111,17 +108,7 @@ class Game
     when "w"
       board.move_cursor(:up)
     when "\r"
-      # debugger
-      if board.selected_piece.nil?
-        board.select_piece(current_player.colour)
-      else
-        if board.selected_piece.move_to(board.cursor_pos)
-
-          @move_completed = true
-          board.selected_piece.move_to!(board.cursor_pos)
-        end
-        board.selected_piece = nil
-      end
+      select_piece_or_move
     when "v"
       File.open("saved_version", 'w') do |file|
         file.print self.to_yaml
@@ -129,19 +116,20 @@ class Game
     end
   end
 
-
-end
-
-class Player
-  attr_reader :name, :colour
-
-  def initialize(name, colour)
-    @name = name
-    @colour = colour
+  def select_piece_or_move
+    if board.selected_piece.nil?
+      board.select_piece(current_player.colour)
+    else
+      move_piece
+    end
   end
 
-  def get_move
-    move = $stdin.getch
+  def move_piece
+    if board.selected_piece.move_to(board.cursor_pos)
+      @move_completed = true
+      board.selected_piece.move_to!(board.cursor_pos)
+    end
+    board.selected_piece = nil
   end
 
 end
