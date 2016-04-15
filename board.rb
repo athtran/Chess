@@ -50,7 +50,6 @@ class Board
   end
 
   def select_piece(colour)
-    # debugger
     unless self[*cursor_pos].class == EmptySpace || self[*cursor_pos].colour != colour
       @selected_piece = self[*cursor_pos]
     end
@@ -175,7 +174,7 @@ class EmptySpace
   def colour
   end
 
-  def move_to(arg)
+  def can_move_to?(arg)
     raise "cant move empty space"
     rescue
   end

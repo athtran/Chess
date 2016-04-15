@@ -16,10 +16,8 @@ class Piece
     arr1.each_with_index.map { |x, i| x + arr2[i] }
   end
 
-  def move_to(cursor_pos)
-    if self.actual_possible_moves.include?(cursor_pos)
-      @moved = true
-    end
+  def can_move_to?(cursor_pos)
+    self.actual_possible_moves.include?(cursor_pos)
   end
 
   def move_to!(this_place)

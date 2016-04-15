@@ -24,9 +24,8 @@ class Game
   end
 
   def play
-    piece = nil
     until over? || force_quit
-      until moved? || force_quit
+      until moved || force_quit
         render_board
         char = current_player.get_move
         handle_char(char)
@@ -52,12 +51,11 @@ class Game
     puts "   Enter to select and deselect a piece"
     puts "   V to save your game"
     puts "   Q to quit"
-    board.kings.each { |king| p king.pos}
   end
 
   def change_current_player
     current_player == @player1 ? self.current_player = @player2 : self.current_player = @player1
-    @move_completed = false
+    @moved = false
   end
 
   def check_if_check(current_player)
@@ -70,9 +68,7 @@ class Game
   end
 
   def find_king(current_player)
-    board.kings.each do |king|
-      return king if king.colour == current_player.colour
-    end
+    board.kings.each { |king| return king if king.colour == current_player.colour }
   end
 
   def win_message
@@ -85,10 +81,6 @@ class Game
 
   def over?
     board.checkmate?(current_player.colour)
-  end
-
-  def moved?
-    @move_completed
   end
 
   def handle_char(char)
@@ -121,8 +113,8 @@ class Game
   end
 
   def move_piece
-    if board.selected_piece.move_to(board.cursor_pos)
-      @move_completed = true
+    if board.selected_piece.can_move_to?(board.cursor_pos)
+      @moved = true
       board.selected_piece.move_to!(board.cursor_pos)
     end
     board.selected_piece = nil
