@@ -47,7 +47,7 @@ class Piece
   end
 
   def move_to!(this_place)
-    board[*pos].remove!
+    board[*this_place].remove!
     board[*pos] = EmptySpace.new
     @pos = this_place
     board[*this_place] = self

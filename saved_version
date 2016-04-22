@@ -1,120 +1,139 @@
 --- !ruby/object:Game
+player1: &30 !ruby/object:Player
+  name: Player 1 - White
+  colour: :white
 board: &1 !ruby/object:Board
   grid:
-  - - !ruby/object:Rook
+  - - &17 !ruby/object:Rook
       board: *1
       pos:
       - 0
       - 0
       colour: :black
-    - !ruby/object:Knight
+    - &18 !ruby/object:Knight
       board: *1
       pos:
       - 0
       - 1
       colour: :black
-    - !ruby/object:Bishop
+    - &19 !ruby/object:Bishop
       board: *1
       pos:
       - 0
       - 2
       colour: :black
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:King
+    - &20 !ruby/object:Queen
+      board: *1
+      pos:
+      - 0
+      - 3
+      colour: :black
+    - &2 !ruby/object:King
       board: *1
       pos:
       - 0
       - 4
       colour: :black
       in_danger: false
+    - &21 !ruby/object:Bishop
+      board: *1
+      pos:
+      - 0
+      - 5
+      colour: :black
+    - !ruby/object:EmptySpace {}
+    - &22 !ruby/object:Rook
+      board: *1
+      pos:
+      - 0
+      - 7
+      colour: :black
+  - - &23 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 0
+      colour: :black
+      moved: false
+    - &24 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 1
+      colour: :black
+      moved: false
+    - &25 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 2
+      colour: :black
+      moved: false
+    - &26 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 3
+      colour: :black
+      moved: false
+    - &27 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 4
+      colour: :black
+      moved: false
+    - &28 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 5
+      colour: :black
+      moved: false
+    - &29 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 1
+      - 6
+      colour: :black
+      moved: false
+    - !ruby/object:EmptySpace {}
+  - - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - &31 !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
     - !ruby/object:Knight
       board: *1
       pos:
-      - 0
-      - 6
-      colour: :black
-    - !ruby/object:Rook
-      board: *1
-      pos:
-      - 0
-      - 7
-      colour: :black
-  - - !ruby/object:Pawn
-      board: *1
-      pos:
-      - 1
-      - 0
-      colour: :black
-      moved: false
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
-      board: *1
-      pos:
-      - 1
-      - 7
-      colour: :black
-      moved: false
-  - - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
-      board: *1
-      pos:
       - 2
-      - 2
-      colour: :black
-      moved: true
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
-      board: *1
-      pos:
-      - 2
-      - 4
-      colour: :white
-      moved: true
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-  - - !ruby/object:EmptySpace {}
-    - !ruby/object:Queen
-      board: *1
-      pos:
-      - 3
-      - 1
-      colour: :black
-      moved: true
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
-      board: *1
-      pos:
-      - 3
       - 5
       colour: :black
-      moved: true
-    - !ruby/object:Bishop
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:Pawn
       board: *1
       pos:
-      - 3
-      - 6
-      colour: :white
-      moved: true
+      - 2
+      - 7
+      colour: :black
+      moved: false
+  - - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
   - - !ruby/object:EmptySpace {}
-    - !ruby/object:Bishop
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:Pawn
       board: *1
       pos:
       - 4
-      - 1
-      colour: :black
-      moved: true
-    - !ruby/object:EmptySpace {}
+      - 2
+      colour: :white
+      moved: false
     - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
@@ -124,52 +143,46 @@ board: &1 !ruby/object:Board
       - 4
       - 6
       colour: :white
-      moved: true
+      moved: false
     - !ruby/object:EmptySpace {}
   - - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
-    - &2 !ruby/object:Pawn
-      board: *1
-      pos:
-      - 5
-      - 3
-      colour: :black
-      moved: true
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Knight
-      board: *1
-      pos:
-      - 5
-      - 5
-      colour: :white
-      moved: true
     - !ruby/object:EmptySpace {}
     - !ruby/object:EmptySpace {}
-  - - !ruby/object:Pawn
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+    - !ruby/object:EmptySpace {}
+  - - &4 !ruby/object:Pawn
       board: *1
       pos:
       - 6
       - 0
       colour: :white
       moved: false
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
+    - &5 !ruby/object:Pawn
       board: *1
       pos:
       - 6
-      - 2
+      - 1
       colour: :white
       moved: false
     - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
+    - &6 !ruby/object:Pawn
+      board: *1
+      pos:
+      - 6
+      - 3
+      colour: :white
+      moved: false
+    - &7 !ruby/object:Pawn
       board: *1
       pos:
       - 6
       - 4
       colour: :white
       moved: false
-    - !ruby/object:Pawn
+    - &8 !ruby/object:Pawn
       board: *1
       pos:
       - 6
@@ -177,60 +190,108 @@ board: &1 !ruby/object:Board
       colour: :white
       moved: false
     - !ruby/object:EmptySpace {}
-    - !ruby/object:Pawn
+    - &9 !ruby/object:Pawn
       board: *1
       pos:
       - 6
       - 7
       colour: :white
       moved: false
-  - - !ruby/object:Rook
+  - - &10 !ruby/object:Rook
       board: *1
       pos:
       - 7
       - 0
       colour: :white
-    - !ruby/object:Knight
+    - &11 !ruby/object:Knight
       board: *1
       pos:
       - 7
       - 1
       colour: :white
-    - !ruby/object:King
+    - &12 !ruby/object:Bishop
       board: *1
       pos:
       - 7
       - 2
+      colour: :white
+    - &3 !ruby/object:King
+      board: *1
+      pos:
+      - 7
+      - 3
       colour: :white
       in_danger: false
-      moved: true
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Bishop
+    - &13 !ruby/object:Queen
+      board: *1
+      pos:
+      - 7
+      - 4
+      colour: :white
+    - &14 !ruby/object:Bishop
       board: *1
       pos:
       - 7
       - 5
       colour: :white
-    - !ruby/object:EmptySpace {}
-    - !ruby/object:Rook
+    - &15 !ruby/object:Knight
+      board: *1
+      pos:
+      - 7
+      - 6
+      colour: :white
+    - &16 !ruby/object:Rook
       board: *1
       pos:
       - 7
       - 7
       colour: :white
   cursor_pos:
-  - 6
-  - 4
-  helper: false
+  - 5
+  - 5
+  helper: true
   selected_piece: 
-  res_piece: *2
-player1: !ruby/object:Player
-  name: Player 1 - White
-  colour: :white
-player2: &3 !ruby/object:Player
-  name: Player 2 - Black
+  kings:
+  - *2
+  - *3
+  white_pieces:
+  - *4
+  - *5
+  - *6
+  - *7
+  - *8
+  - *9
+  - *10
+  - *11
+  - *12
+  - *3
+  - *13
+  - *14
+  - *15
+  - *16
+  black_pieces:
+  - *17
+  - *18
+  - *19
+  - *20
+  - *2
+  - *21
+  - *22
+  - *23
+  - *24
+  - *25
+  - *26
+  - *27
+  - *28
+  - *29
+  current_player: *30
+  res_piece: *31
+player2: !ruby/object:ComputerPlayer
+  name: ComputerPlayer - Black
   colour: :black
-current_player: *3
-quit_var: false
-move_completed: false
+  board: *1
+  selected_piece: 
+  start: 
+  destination: 
+current_player: *30
+moved: false

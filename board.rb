@@ -190,7 +190,7 @@ class Board
         self.black_pieces.each {|piece| black << piece.class }
         self.white_pieces.each {|piece| white << piece.class }
         message += "Black pieces: #{black} \n"
-        message += "White pieces: #{white} \n"
+        message += "White pieces: #{white } \n"
 
         # message += "Conflicts: #{self.conflicts} \n"
       message
