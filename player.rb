@@ -12,7 +12,7 @@ class Player
 end
 
 class ComputerPlayer
-  attr_reader :name, :colour, :board, :start, :destionation
+  attr_reader :name, :colour, :board, :start, :destination, :selected_piece
 
   def initialize(name, colour, board)
     @name = name
@@ -21,15 +21,16 @@ class ComputerPlayer
   end
 
   def generate_start
-    [1,5]
+    @selected_piece = board.pieces_that_can_move(@colour).sample
+    @selected_piece.pos
   end
 
   def generate_destination
-    [3,5]
+    @selected_piece.actual_possible_moves.sample
   end
 
   def get_move
-    sleep (1/2)
+    sleep (3/4)
     @start ||= generate_start
     @destination ||= generate_destination
 
@@ -39,7 +40,7 @@ class ComputerPlayer
       move_to(@start)
     else
       if board.cursor_pos == @destination
-        @start, @destination = nil, nil
+        @start, @destination, @selected_piece = nil, nil, nil
         return "\r"
       end
       move_to(@destination)
@@ -53,7 +54,7 @@ class ComputerPlayer
       "w"
     elsif board.cursor_pos[1] < pos[1]
       "d"
-    elsif board.cursor_pos[1] < pos[1]
+    elsif board.cursor_pos[1] > pos[1]
       "a"
     end
   end

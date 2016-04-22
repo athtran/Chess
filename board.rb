@@ -3,7 +3,8 @@ require 'byebug'
 require 'io/console'
 
 class Board
-  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece, :kings, :current_player
+  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece,
+                :kings, :current_player, :white_pieces, :black_pieces
 
   CURSOR_MOVES = {
       :left => [0, -1],
@@ -18,8 +19,11 @@ class Board
     @helper = true
     @selected_piece = nil
     @kings = []
+    @white_pieces = []
+    @black_pieces = []
     @current_player = player1
     populate_board
+    assign_pieces
   end
 
   def populate_board
@@ -48,6 +52,20 @@ class Board
     self[7,6] = Knight.new([7,6], :white, self)
     self[7,7] = Rook.new([7,7], :white, self)
     @kings << self[7,3]
+  end
+
+  def assign_pieces
+    (0..7).each do |row|
+      (0..7).each do |col|
+        pos = row, col
+        if self[*pos].colour == :white
+          @white_pieces << self[*pos]
+        elsif self[*pos].colour == :black
+          @black_pieces << self[*pos]
+        end
+      end
+    end
+
   end
 
   def select_piece(colour)
@@ -144,7 +162,13 @@ class Board
     true
   end
 
-
+  def pieces_that_can_move(colour)
+    if colour == :white
+      @white_pieces.select {|piece| piece.can_move?}
+    else
+      @black_pieces.select {|piece| piece.can_move?}
+    end
+  end
 
   def debug_info
     if self.helper

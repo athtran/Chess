@@ -8,6 +8,10 @@ class Piece
     @colour = colour
   end
 
+  def can_move?
+    !self.actual_possible_moves.empty?
+  end
+
   def add_direction_to_pos(dir)
     pos.each_with_index.map { |x, i| x + dir[i] }
   end
