@@ -17,9 +17,9 @@ class Game
   attr_accessor :force_quit, :moved, :current_player
 
   def initialize
-    @board = Board.new
     @player1 = Player.new("Player 1 - White", :white)
-    @player2 = Player.new("Player 2 - Black", :black)
+    @board = Board.new(@player1)
+    @player2 = ComputerPlayer.new("ComputerPlayer - Black", :black, @board)
     @current_player = @player1
   end
 

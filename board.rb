@@ -3,7 +3,7 @@ require 'byebug'
 require 'io/console'
 
 class Board
-  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece, :kings
+  attr_accessor :grid, :cursor_pos, :helper, :selected_piece, :res_piece, :kings, :current_player
 
   CURSOR_MOVES = {
       :left => [0, -1],
@@ -12,12 +12,13 @@ class Board
       :up => [-1, 0]
   }
 
-  def initialize
+  def initialize(player1)
     @grid = Array.new(8) { Array.new(8) { EmptySpace.new } }
     @cursor_pos = 0, 0
-    @helper = false
+    @helper = true
     @selected_piece = nil
     @kings = []
+    @current_player = player1
     populate_board
   end
 
@@ -66,16 +67,19 @@ class Board
       (0..7).each do |col|
         pos = row, col
         object_on_tile = self[*pos]
-
-        case
-        when @cursor_pos == [*pos]
-          print object_on_tile.to_s.on_light_yellow
-        when (selected_piece || self[*cursor_pos]).possible_moves.include?([*pos])
-          print object_on_tile.to_s.on_light_cyan
-        when (row + col).even?
-          print object_on_tile.to_s.on_light_white
-        when (row + col).odd?
-          print object_on_tile.to_s.on_light_black
+        begin
+          case
+          when @cursor_pos == [*pos]
+            print object_on_tile.to_s.on_light_yellow
+          when (selected_piece || self[*cursor_pos]).possible_moves.include?([*pos]) && (selected_piece || self[*cursor_pos]).colour == current_player.colour
+            print object_on_tile.to_s.on_light_cyan
+          when (row + col).even?
+            print object_on_tile.to_s.on_light_white
+          when (row + col).odd?
+            print object_on_tile.to_s.on_light_black
+          end
+        rescue NoMethodError
+          debugger
         end
       end
       puts

@@ -27,18 +27,18 @@ class Piece
   end
 
   def actual_possible_moves #takes in possible moves for piece, removes moves that result in check
-    actual_possible_moves_array = []
+    result = []
     old_pos = pos
 
     possible_moves.each do |move|
       board.res_piece = board[*move]
       self.move_to!(move)
-      actual_possible_moves_array << move unless board.check?(self.colour)
+      result << move unless board.check?(self.colour)
       self.move_to!(old_pos)
       board[*move] = board.res_piece
     end
 
-    actual_possible_moves_array
+    result
   end
 end
 
