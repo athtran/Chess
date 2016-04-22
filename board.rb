@@ -186,6 +186,12 @@ class Board
         message += "Checkmate white?: #{self.checkmate?(:white)} \n"
         message += "Checkmate black?: #{self.checkmate?(:black)} \n"
 
+        black, white = [], []
+        self.black_pieces.each {|piece| black << piece.class }
+        self.white_pieces.each {|piece| white << piece.class }
+        message += "Black pieces: #{black} \n"
+        message += "White pieces: #{white} \n"
+
         # message += "Conflicts: #{self.conflicts} \n"
       message
     end
@@ -216,5 +222,8 @@ class EmptySpace
 
   def possible_moves
     []
+  end
+
+  def remove!
   end
 end

@@ -12,6 +12,28 @@ class Piece
     !self.actual_possible_moves.empty?
   end
 
+  def can_take_opponent?
+    self.actual_possible_moves.each do |pos|
+      return true if board[*pos].class != EmptySpace
+    end
+
+    false
+  end
+
+  def remove!
+    if self.colour == :white
+      board.white_pieces.delete(self)
+    else
+      board.black_pieces.delete(self)
+    end
+  end
+
+  def take_positions
+    self.actual_possible_moves.select do |pos|
+      board[*pos].class != EmptySpace
+    end
+  end
+
   def add_direction_to_pos(dir)
     pos.each_with_index.map { |x, i| x + dir[i] }
   end
@@ -25,6 +47,13 @@ class Piece
   end
 
   def move_to!(this_place)
+    board[*pos].remove!
+    board[*pos] = EmptySpace.new
+    @pos = this_place
+    board[*this_place] = self
+  end
+
+  def pretend_move_to!(this_place)
     board[*pos] = EmptySpace.new
     @pos = this_place
     board[*this_place] = self
@@ -36,9 +65,9 @@ class Piece
 
     possible_moves.each do |move|
       board.res_piece = board[*move]
-      self.move_to!(move)
+      self.pretend_move_to!(move)
       result << move unless board.check?(self.colour)
-      self.move_to!(old_pos)
+      self.pretend_move_to!(old_pos)
       board[*move] = board.res_piece
     end
 

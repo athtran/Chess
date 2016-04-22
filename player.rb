@@ -21,12 +21,16 @@ class ComputerPlayer
   end
 
   def generate_start
-    @selected_piece = board.pieces_that_can_move(@colour).sample
+    possible_starts = board.pieces_that_can_move(@colour).select do |piece|
+      piece.can_take_opponent?
+    end
+
+    @selected_piece = (possible_starts.empty? ? board.pieces_that_can_move(@colour).sample : possible_starts.sample)
     @selected_piece.pos
   end
 
   def generate_destination
-    @selected_piece.actual_possible_moves.sample
+    @selected_piece.can_take_opponent? ? @selected_piece.take_positions.sample : @selected_piece.actual_possible_moves.sample
   end
 
   def get_move
