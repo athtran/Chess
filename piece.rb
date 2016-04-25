@@ -1,11 +1,21 @@
 class Piece
 
-  attr_reader :colour, :pos, :board
+  attr_reader :colour, :pos, :board, :value
+
+  PIECE_VALUE = {
+    Pawn: 1,
+    Bishop: 3,
+    Knight: 3,
+    Rook: 5,
+    Queen: 9,
+    King: 100
+  }
 
   def initialize(pos, colour, board)
     @board = board
     @pos = pos
     @colour = colour
+    @value = PIECE_VALUE[self.class.to_s.to_sym]
   end
 
   def can_move?
@@ -18,6 +28,18 @@ class Piece
     end
 
     false
+  end
+
+  def max_value_of_possible_captures
+    max = 0
+    self.actual_possible_moves.each do |pos|
+      max = board[*pos].value if board[*pos].value > max
+    end
+    max
+  end
+
+  def highest_possible_capture
+    self.actual_possible_moves.max_by { |pos| board[*pos].value }
   end
 
   def remove!

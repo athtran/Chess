@@ -27,7 +27,7 @@ class Board
   end
 
   def populate_board
-    (0..7).each do |col|
+    (1..6).each do |col|
       self[1,col] = Pawn.new([1,col], :black, self)
     end
     self[0,0] = Rook.new([0,0], :black, self)
@@ -40,7 +40,7 @@ class Board
     self[0,7] = Rook.new([0,7], :black, self)
     @kings << self[0,4]
 
-    (0..7).each do |col|
+    (1..7).each do |col|
       self[6,col] = Pawn.new([6,col], :white, self)
     end
     self[7,0] = Rook.new([7,0], :white, self)
@@ -190,7 +190,7 @@ class Board
         self.black_pieces.each {|piece| black << piece.class }
         self.white_pieces.each {|piece| white << piece.class }
         message += "Black pieces: #{black} \n"
-        message += "White pieces: #{white } \n"
+        message += "White pieces: #{white} \n"
 
         # message += "Conflicts: #{self.conflicts} \n"
       message
@@ -225,5 +225,9 @@ class EmptySpace
   end
 
   def remove!
+  end
+
+  def value
+    0
   end
 end

@@ -25,19 +25,26 @@ class ComputerPlayer
       piece.can_take_opponent?
     end
 
-    @selected_piece = (possible_starts.empty? ? board.pieces_that_can_move(@colour).sample : possible_starts.sample)
+    @selected_piece = (possible_starts.empty? ? board.pieces_that_can_move(@colour).sample : pick_max_start(possible_starts))
     @selected_piece.pos
   end
 
   def generate_destination
-    @selected_piece.can_take_opponent? ? @selected_piece.take_positions.sample : @selected_piece.actual_possible_moves.sample
+    @selected_piece.can_take_opponent? ? @selected_piece.take_positions.sample : pick_max_end(@selected_piece)
+  end
+
+  def pick_max_start(array)
+    array.max_by {|piece| piece.max_value_of_possible_captures }
+  end
+
+  def pick_max_end(piece)
+    piece.highest_possible_capture
   end
 
   def get_move
-    sleep (3/4)
+    sleep (1.0/12)
     @start ||= generate_start
     @destination ||= generate_destination
-
 
     if board.selected_piece.nil?
       return "\r" if board.cursor_pos == @start
